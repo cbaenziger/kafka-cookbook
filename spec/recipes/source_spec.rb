@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe 'kafka::source' do
   let :chef_run do
-    ChefSpec::Runner.new(step_into: %w(kafka_download kafka_install)) do |node|
+    ChefSpec::Runner.new(:step_into => %w(kafka_download kafka_install)) do |node|
       node.set[:kafka][:install_method] = :source
     end.converge(described_recipe)
   end
