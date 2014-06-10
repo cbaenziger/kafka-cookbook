@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe 'kafka::binary' do
   let :chef_run do
-    ChefSpec::Runner.new(step_into: %w(kafka_download kafka_install)) do |node|
+    ChefSpec::Runner.new(:step_into => %w(kafka_download kafka_install)) do |node|
       node.set[:kafka][:install_method] = :binary
     end.converge(described_recipe)
   end
@@ -23,9 +23,9 @@ describe 'kafka::binary' do
 
   it 'extracts downloaded Kafka archive' do
     expect(chef_run).to run_execute('extract-kafka').with({
-      cwd: '/opt/kafka/build',
-      user: 'kafka',
-      group: 'kafka'
+      :cwd => '/opt/kafka/build',
+      :user => 'kafka',
+      :group => 'kafka'
     })
   end
 
