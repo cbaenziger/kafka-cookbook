@@ -25,9 +25,9 @@ describe 'kafka::_configure' do
 
     it 'creates the configuration file' do
       expect(chef_run).to create_template(path).with({
-        owner: 'kafka',
-        group: 'kafka',
-        mode: '644'
+        :owner => 'kafka',
+        :group => 'kafka',
+        :mode => '644'
       })
     end
 
@@ -340,87 +340,88 @@ describe 'kafka::_configure' do
     context 'explicit configuration' do
       let :kafka_attributes do
         {
-          broker_id: 10002,
-          message_max_bytes: 1_000_000,
-          num_network_threads: 3,
-          num_io_threads: 8,
-          background_threads: 4,
-          queued_max_requests: 500,
-          port: 9092,
-          host_name: 'host-name',
-          advertised_host_name: 'advertised-host-name',
-          advertised_port: 9092,
-          socket: {
-            send_buffer_bytes: 100 * 1024,
-            receive_buffer_bytes: 100 * 1024,
-            request_max_bytes: 100 * 1024 * 1024
+           :broker_id =>  10002,
+           :message_max_bytes =>  1_000_000,
+           :num_network_threads =>  3,
+           :num_io_threads =>  8,
+           :background_threads =>  4,
+           :queued_max_requests =>  500,
+           :port =>  9092,
+           :host_name =>  'host-name',
+           :advertised_host_name =>  'advertised-host-name',
+           :advertised_port =>  9092,
+           :socket =>  {
+           :send_buffer_bytes =>  100 * 1024,
+           :receive_buffer_bytes =>  100 * 1024,
+           :request_max_bytes =>  100 * 1024 * 1024
           },
-          num_partitions: 1,
-          log: {
-            dirs: ['/tmp/kafka-logs-1', '/tmp/kafka-logs-2'],
-            segment_bytes: 1024 * 1024 * 1024,
-            roll_hours: 24 * 7,
-            retention_minutes: 24 * 7 * 60,
-            retention_hours: 24 * 7,
-            retention_bytes: -1,
-            retention_check_interval_ms: 60000,
-            cleaner_enable: true,
-            cleaner_threads: 8,
-            cleaner_io_max_bytes_per_second: 10,
-            cleaner_dedupe_buffer_size: 1000,
-            cleaner_io_buffer_size: 50 * 1024,
-            cleaner_io_buffer_load_factor: 0.8,
-            cleaner_backoff_ms: 1500,
-            cleaner_min_cleanable_ratio: 0.1,
-            cleaner_delete_retention_ms: 1250,
-            cleanup_interval_mins: 10,
-            index_size_max_bytes: 10 * 1024 * 1024,
-            index_interval_bytes: 4096,
-            flush_interval_messages: 10_000,
-            flush_interval_ms: 3000,
-            flush_scheduler_interval_ms: 3000,
-            delete_delay_ms: 1000,
-            flush_offset_checkpoint_interval_ms: 1000,
-            cleanup_policy: 'delete',
+          :num_partitions => 1,
+          :log => {
+                 :dirs =>  ['/tmp/kafka-logs-1', '/tmp/kafka-logs-2'],
+                 :segment_bytes =>  1024 * 1024 * 1024,
+                 :roll_hours =>  24 * 7,
+                 :retention_minutes =>  24 * 7 * 60,
+                 :retention_hours =>  24 * 7,
+                 :retention_bytes =>  -1,
+                 :retention_check_interval_ms =>  60000,
+                 :cleaner_enable =>  true,
+                 :cleaner_threads =>  8,
+                 :cleaner_io_max_bytes_per_second =>  10,
+                 :cleaner_dedupe_buffer_size =>  1000,
+                 :cleaner_io_buffer_size =>  50 * 1024,
+                 :cleaner_io_buffer_load_factor =>  0.8,
+                 :cleaner_backoff_ms =>  1500,
+                 :cleaner_min_cleanable_ratio =>  0.1,
+                 :cleaner_delete_retention_ms =>  1250,
+                 :cleanup_interval_mins =>  10,
+                 :index_size_max_bytes =>  10 * 1024 * 1024,
+                 :index_interval_bytes =>  4096,
+                 :flush_interval_messages =>  10_000,
+                 :flush_interval_ms =>  3000,
+                 :flush_scheduler_interval_ms =>  3000,
+                 :delete_delay_ms =>  1000,
+                 :flush_offset_checkpoint_interval_ms =>  1000,
+                 :cleanup_policy =>  'delete',            
           },
-          auto_create_topics: true,
-          controller: {
-            socket_timeout_ms: 30_000,
-            message_queue_size: 10,
+          :auto_create_topics => true,
+          :controller =>  {
+            :socket_timeout_ms => 30_000,
+            :message_queue_size => 10,
           },
-          default_replication_factor: 1,
-          replica: {
-            lag_time_max_ms: 10_000,
-            lag_max_messages: 4000,
-            socket_timeout_ms: 30 * 1000,
-            socket_receive_buffer_bytes: 64 * 1024,
-            fetch_max_bytes: 1024 * 1024,
-            fetch_wait_max_ms: 500,
-            fetch_min_bytes: 1,
-            high_watermark_checkpoint_interval_ms: 5000,
+          :default_replication_factor => 1,
+          :replica => {
+            :lag_time_max_ms => 10_000,
+            :lag_max_messages => 4000,
+            :socket_timeout_ms => 30 * 1000,
+            :socket_receive_buffer_bytes => 64 * 1024,
+            :fetch_max_bytes => 1024 * 1024,
+            :fetch_wait_max_ms => 500,
+            :fetch_min_bytes => 1,
+            :high_watermark_checkpoint_interval_ms => 5000,
           },
-          num_replica_fetchers: 1,
-          fetch_purgatory_purge_interval_requests: 10_000,
-          producer_purgatory_purge_interval_requests: 10_000,
-          controlled_shutdown: {
-            max_retries: 3,
-            retry_backoff_ms: 5000,
-            enabled: false,
+          :num_replica_fetchers => 1,
+          :fetch_purgatory_purge_interval_requests => 10_000,
+          :producer_purgatory_purge_interval_requests => 10_000,
+          :controlled_shutdown => {
+            :max_retries => 3,
+            :retry_backoff_ms => 5000,
+            :enabled => false,
           },
-          auto_leader_rebalance_enable: true,
-          leader: {
-            imbalance_per_broker_percentage: 0.7,
-            imbalance_check_interval_seconds: 3,
+          :auto_leader_rebalance_enable => true,
+          :leader => {
+            :imbalance_per_broker_percentage => 0.7,
+            :imbalance_check_interval_seconds => 3,
           },
-          offset_metadata_max_bytes: 1000,
-          zookeeper: {
-            connect: [],
-            connection_timeout_ms: 6000,
-            session_timeout_ms: 6000,
-            sync_time_ms: 2000,
+          :offset_metadata_max_bytes => 1000,
+          :zookeeper => {
+            :connect => [],
+            :connection_timeout_ms => 6000,
+            :session_timeout_ms => 6000,
+            :sync_time_ms => 2000,
           }
         }
       end
+
 
       context 'general configuration' do
         it 'sets broker id' do
@@ -927,10 +928,10 @@ describe 'kafka::_configure' do
 
         let :zookeeper_attrs do
           {
-            connect: %w(127.0.0.1),
-            connection_timeout_ms: 6000,
-            session_timeout_ms: 6000,
-            sync_time_ms: 2000,
+            :connect => %w(127.0.0.1),
+            :connection_timeout_ms => 6000,
+            :session_timeout_ms => 6000,
+            :sync_time_ms => 2000,
           }
         end
 
@@ -942,7 +943,7 @@ describe 'kafka::_configure' do
 
         context 'when zookeeper.path is set' do
           let :zookeeper_attrs do
-            {connect: %w(127.0.0.1 127.0.0.2), path: '/test'}
+            {:connect => %w(127.0.0.1 127.0.0.2), :path => '/test'}
           end
 
           it 'includes the path as well' do
@@ -978,9 +979,9 @@ describe 'kafka::_configure' do
 
     it 'creates the configuration file' do
       expect(chef_run).to create_template(path).with({
-        owner: 'kafka',
-        group: 'kafka',
-        mode: '644'
+        :owner => 'kafka',
+        :group => 'kafka',
+        :mode => '644'
       })
     end
 
@@ -1019,19 +1020,19 @@ describe 'kafka::_configure' do
 
     it 'creates a script at the appropriate location' do
       expect(chef_run).to create_template(init_path).with({
-        owner: 'root',
-        group: 'root',
-        mode: script_permissions,
-        source: source_template,
+        :owner =>'root',
+        :group => 'root',
+        :mode => script_permissions,
+        :source => source_template,
       })
     end
 
     context 'environment variables' do
       it 'creates a file for setting necessary environment variables' do
         expect(chef_run).to create_template(env_path).with({
-          owner: 'root',
-          group: 'root',
-          mode: '644'
+        :owner => 'kafka',
+        :group => 'kafka',
+        :mode => '644'
         })
       end
 
@@ -1100,7 +1101,7 @@ describe 'kafka::_configure' do
       context 'and platform is \'ubuntu\'' do
         it_behaves_like 'an init style' do
           let :platform_and_version do
-            {platform: 'ubuntu', version: '13.10'}
+            {:platform => 'ubuntu', :version => '13.10'}
           end
 
           let :init_style do
@@ -1124,7 +1125,7 @@ describe 'kafka::_configure' do
       context 'and platform is \'debian\'' do
         it_behaves_like 'an init style' do
           let :platform_and_version do
-            {platform: 'debian', version: '7.2'}
+            {:platform => 'debian', :version => '7.2'}
           end
 
           let :init_style do

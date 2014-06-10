@@ -21,15 +21,15 @@ describe 'kafka::_setup' do
 
       it 'creates a kafka user' do
         expect(chef_run).to create_user('kafka').with({
-          shell: '/sbin/nologin',
-          gid: 'kafka'
+          :shell => '/sbin/nologin',
+          :gid => 'kafka'
         })
       end
     end
 
     context 'when overridden' do
       let :kafka_attrs do
-        {user: 'spec', group: 'spec'}
+        {:user => 'spec', :group => 'spec'}
       end
 
       it 'creates a group with set name' do
@@ -38,8 +38,8 @@ describe 'kafka::_setup' do
 
       it 'creates a user with set name' do
         expect(chef_run).to create_user('spec').with({
-          shell: '/sbin/nologin',
-          gid: 'spec'
+          :shell => '/sbin/nologin',
+          :gid => 'spec'
         })
       end
     end
@@ -47,33 +47,33 @@ describe 'kafka::_setup' do
 
   it 'creates installation directory' do
     expect(chef_run).to create_directory('/opt/kafka').with({
-      owner: 'kafka',
-      group: 'kafka',
-      mode: '755'
+      :owner => 'kafka',
+      :group => 'kafka',
+      :mode => '755'
     })
   end
 
   it 'creates build directory' do
     expect(chef_run).to create_directory('/opt/kafka/build').with({
-      owner: 'kafka',
-      group: 'kafka',
-      mode: '755'
+      :owner => 'kafka',
+      :group => 'kafka',
+      :mode => '755'
     })
   end
 
   it 'creates log directory' do
     expect(chef_run).to create_directory('/var/log/kafka').with({
-      owner: 'kafka',
-      group: 'kafka',
-      mode: '755'
+      :owner => 'kafka',
+      :group => 'kafka',
+      :mode => '755'
     })
   end
 
   it 'creates config directory' do
     expect(chef_run).to create_directory('/opt/kafka/config').with({
-      owner: 'kafka',
-      group: 'kafka',
-      mode: '755'
+      :owner => 'kafka',
+      :group => 'kafka',
+      :mode => '755'
     })
   end
 end
