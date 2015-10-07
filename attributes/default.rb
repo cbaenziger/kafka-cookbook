@@ -63,10 +63,12 @@ default.kafka.jmx_opts = %w[
 #
 # User for directories, configuration files and running Kafka.
 default.kafka.user = 'kafka'
+default.kafka.create_user = true
 
 #
 # Group for directories, configuration files and running Kafka.
 default.kafka.group = 'kafka'
+default.kafka.create_group = true
 
 #
 # JVM heap options for Kafka.

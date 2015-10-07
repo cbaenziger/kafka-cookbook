@@ -3,12 +3,15 @@
 # Recipe:: _setup
 #
 
-group node.kafka.group
+group node.kafka.group do
+  only_if { node.kafka.create_group }
+end
 
 user node.kafka.user do
   gid node.kafka.group
   home '/var/empty/kafka'
   shell '/sbin/nologin'
+  only_if { node.kafka.create_user }
 end
 
 [
